@@ -11,7 +11,7 @@ const path = require('path');
 // Load environment variables
 const port = process.env.PORT || 3000;
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend'), { maxAge: 0, etag: false }));
 // Send the main quiz page on root request
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../quiz.html'))
