@@ -7,6 +7,13 @@ const mysql = require('mysql2');
 const app = express();
 app.use(express.json());
 app.use(cors());
+const path = require('path');
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, '../frontend')));
+// Send the main quiz page on root request
+app.get('/', (req, res) =>
+  res.sendFile(path.join(__dirname, '../frontend/quiz.html'))
+);
 
 // Configuração do MySQL
 const db = mysql.createConnection({
