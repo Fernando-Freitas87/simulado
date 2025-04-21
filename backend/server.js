@@ -17,20 +17,24 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../quiz.html'))
 );
 
-// Configuração do MySQL
-const db = mysql.createConnection({
+// Configuração do MySQL via Pool
+const pool = mysql.createPool({
   host: process.env.MYSQLHOST || 'localhost',
   port: process.env.MYSQLPORT ? Number(process.env.MYSQLPORT) : 3306,
   user: process.env.MYSQLUSER || 'root',
   password: process.env.MYSQLPASSWORD || '1234',
-  database: process.env.MYSQLDATABASE || 'simulado_detran'
+  database: process.env.MYSQLDATABASE || 'simulado_detran',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect(err => {
+pool.getConnection((err, connection) => {
   if (err) {
-    console.error('❌ Erro ao conectar ao MySQL:', err.message);
+    console.error('❌ Erro ao conectar ao MySQL via pool:', err.message);
   } else {
-    console.log('✅ Conectado ao MySQL');
+    console.log('✅ Pool de conexões MySQL pronto');
+    connection.release();
   }
 });
 
@@ -57,7 +61,7 @@ app.get('/prova/:materia', (req, res) => {
 
   const queryParams = materia === 'aleatorio' ? [] : [materia];
 
-  db.query(sql, queryParams, (err, results) => {
+  pool.query(sql, queryParams, (err, results) => {
     if (err) {
       console.error('❌ Erro ao buscar questões:', err.message);
       return res.status(500).json({ success: false, error: err.message });
