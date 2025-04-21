@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '../frontend')));
 // Send the main quiz page on root request
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '../frontend/quiz.html'))
+  res.sendFile(path.join(__dirname, '../quiz.html'))
 );
 
 // Configuração do MySQL
