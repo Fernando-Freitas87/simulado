@@ -21,7 +21,7 @@
   }
 
   async function loadQuestions(materia) {
-    const response = await fetch(`http://localhost:3000/prova/${materia}`);
+    const response = await fetch(`/prova/${materia}`);    
     const data = await response.json();
     if (data.success) {
       questions = data.questoes.map(q => ({
