@@ -19,11 +19,11 @@ app.get('/', (req, res) =>
 
 // Configuração do MySQL
 const db = mysql.createConnection({
-  host: process.env.MYSQL_HOST || 'localhost',
-  port: process.env.MYSQL_PORT ? Number(process.env.MYSQL_PORT) : 3306,
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || '1234',
-  database: process.env.MYSQL_DATABASE || 'simulado_detran'
+  host: process.env.MYSQLHOST || 'localhost',
+  port: process.env.MYSQLPORT ? Number(process.env.MYSQLPORT) : 3306,
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || '1234',
+  database: process.env.MYSQLDATABASE || 'simulado_detran'
 });
 
 db.connect(err => {
