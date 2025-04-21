@@ -1,0 +1,202 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.materia-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.materia-selector input,
+.materia-selector select {
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.materia-selector button {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  font-size: 1.1rem;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.materia-selector button:hover {
+  background-color: #004494;
+}
+.container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ccc;
+}
+p#question-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0056b3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #004494;
+}
+#feedback {
+    font-size: 1rem;
+    margin-top: 15px;
+    min-height: 1.5em;
+    color: #333;
+    text-align: center;
+}
+#final-message {
+    text-align: center;
+}
+#final-message h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+#final-message p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+.question-palette {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+.question-palette .palette-item {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  color: #333;
+  font-weight: bold;
+}
+.question-palette .palette-item.answered {
+  background-color: #007bff;
+  color: #fff;
+}
+.question-palette .palette-item.current {
+  border-color: #0056b3;
+  background-color: #0056b3;
+  color: #fff;
+}
+/* Destacar respostas corretas em verde */
+.correct-answer {
+  background-color: #4CAF50;
+}
+/* Palette: destacar questão errada em laranja */
+.question-palette .palette-item.wrong {
+  background-color: #ffa500;
+  color: #fff;
+}
+.logo {
+    display: block;
+    margin: 0 auto 30px;
+    max-width: 350px;
+}
+.controls {
+    text-align: center;
+    margin-top: 20px;
+}
+#restart-button {
+    margin-top: 10px;
+}
+
+/* Destacar respostas erradas em laranja */
+.wrong-answer {
+  background-color: #ffa500;
+}
+
+/* ✔ Indicador de resposta correta */
+.correct-answer::before {
+  content: "✔ ";
+  font-weight: bold;
+  color: white;
+}
+
+/* Tooltip para botões da paleta */
+.palette-item[title] {
+  position: relative;
+}
+.palette-item[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  background: #333;
+  color: #fff;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Acessibilidade: foco visível */
+.palette-item:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulado DETRAN</title>
+    <link rel="stylesheet" href="frontend/style.css">
+</head>
+<body>
+    <div class="container">
+        <img class="logo"
+             src="https://www.detran.ce.gov.br/wp-content/themes/detrance2018/assets/images/logo_header_w.svg"
+             alt="Logo DETRAN">
+        <h1>Simulado</h1>
+        <div class="materia-selector">
+          <input id="nome-usuario" type="text" placeholder="Digite seu nome">
+          <input id="cpf-usuario" type="text" placeholder="Digite seu CPF">
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              const cpfInput = document.getElementById("cpf-usuario");
+              cpfInput.addEventListener("input", function() {
+                let value = cpfInput.value.replace(/\D/g, "").slice(0, 11);
+                value = value.replace(/(\d{3})(\d)/, "$1.$2");
+                value = value.replace(/(\d{3})(\d)/, "$1.$2");
+                value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+                cpfInput.value = value;
+              });
+            });
+          </script>
+          <select id="autoescola-usuario">
+            <option value="">Selecione sua autoescola</option>
+            <option value="Autoescola Acaraú">Autoescola Acaraú</option>
+            <option value="Autoescola Vale do Acaraú">Autoescola Vale do Acaraú</option>
+            <option value="Autoescola São Francisco de Cruz">Autoescola São Francisco de Cruz</option>
+            <option value="Autoescola Itarema">Autoescola Itarema</option>
+            <option value="Autoescola Paraíso">Autoescola Paraíso</option>
+            <option value="Autoescola Terra da Luz">Autoescola Terra da Luz</option>
+          </select>
+          <select id="materia-select">
+            <option value="">Selecione a materia</option>
+            <option value="aleatorio">Aleatório</option>
+            <option value="direcao-defensiva">Direção Defensiva</option>
+            <option value="legislacao">Legislação</option>
+            <option value="meio-ambiente">Meio Ambiente</option>
+            <option value="mecanica">Mecânica</option>
+            <option value="primeiros-socorros">Primeiros Socorros</option>
+          </select>
+          <button id="start-button">Iniciar Prova</button>
+        </div>
+        <div id="question-palette" class="question-palette"></div>
+        <div id="quiz-container"></div>
+        <div id="feedback"></div>
+        <div class="controls">
+            <button id="submit-button">Responder</button>
+            <button id="restart-button" style="display:none;">Tentar Novamente</button>
+        </div>
+    </div>
+    <script src="frontend/script.js"></script>
+</body>
+</html>
