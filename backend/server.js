@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const path = require('path');
+// Load environment variables
+const port = process.env.PORT || 3000;
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));
 // Send the main quiz page on root request
@@ -17,10 +19,19 @@ app.get('/', (req, res) =>
 
 // Configuração do MySQL
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1234',
-  database: 'simulado_detran'
+  host: process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQL_PORT ? Number(process.env.MYSQL_PORT) : 3306,
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || '1234',
+  database: process.env.MYSQL_DATABASE || 'simulado_detran'
+});
+
+db.connect(err => {
+  if (err) {
+    console.error('❌ Erro ao conectar ao MySQL:', err.message);
+  } else {
+    console.log('✅ Conectado ao MySQL');
+  }
 });
 
 // Mapeamento das matérias para os nomes no banco de dados
@@ -58,6 +69,6 @@ app.get('/prova/:materia', (req, res) => {
 });
 
 // Inicialização do servidor
-app.listen(3000, () => {
-  console.log('🚀 Servidor rodando em http://localhost:3000');
+app.listen(port, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${port}`);
 });
