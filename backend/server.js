@@ -17,8 +17,8 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../quiz.html'))
 );
 
-// Configuração do MySQL via Pool
-const pool = mysql.createPool({
+// Configuração do MySQL usando URL ou pool
+const poolConfig = process.env.MYSQL_URL || {
   host: process.env.MYSQLHOST || 'localhost',
   port: process.env.MYSQLPORT ? Number(process.env.MYSQLPORT) : 3306,
   user: process.env.MYSQLUSER || 'root',
@@ -27,7 +27,8 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
-});
+};
+const pool = mysql.createPool(poolConfig);
 
 pool.getConnection((err, connection) => {
   if (err) {
